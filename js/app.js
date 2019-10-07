@@ -53,16 +53,16 @@ function makeActive() {
 
   for(let i = 0; i < sectionsArr.length; i++) {
     window.addEventListener('scroll', () => {
-      if(Math.floor(window.scrollY) >= sectionsArr[i].offsetTop) {
+      if(Math.floor(window.scrollY) + navbarList.offsetHeight >= sectionsArr[i].offsetTop) {
         // Toggle the active state of the section which is already active  
-        document.querySelector('.your-active-class').classList.toggle('your-active-class');
+        document.querySelector('.your-active-class').classList.remove('your-active-class');
         // Make the section scrolled active
         let idSelector = sectionsArr[i].id;
         idSelector = '#' + idSelector;
-        document.querySelector(idSelector).classList.toggle('your-active-class'); 
+        document.querySelector(idSelector).classList.add('your-active-class'); 
         // Make the link for the section scrolled active
-        document.querySelector('.active').classList.toggle('active');
-        menuLinks[i].classList.toggle('active');
+        document.querySelector('.active').classList.remove('active');
+        menuLinks[i].classList.add('active');
       }
     }) 
   }
