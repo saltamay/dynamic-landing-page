@@ -61,6 +61,8 @@ section {
 }
 
 
+
+
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
@@ -225,4 +227,16 @@ section.your-active-class .landing__container::after {
 		           translate(-1em) 
 		           rotate(-360deg);
 	}
+}
+
+@media screen and (max-width: 428px) {
+    .page__header {
+        position: relative;
+        top: 0;
+    }
+    .navbar__menu ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
