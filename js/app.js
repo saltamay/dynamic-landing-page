@@ -32,8 +32,9 @@ const navbarList = document.getElementById('navbar__list');
 */
 
 // build the nav
-function buildNav(sectionsArr) {
+function buildNav() {
   sectionsArr.forEach(section => {
+    console.log(section.offsetTop);
     if (section.id.includes('section')) {
       let navList = document.createElement('li');
       navList.innerHTML = `<a class="menu__link">${section.dataset.nav}`;
@@ -44,22 +45,31 @@ function buildNav(sectionsArr) {
 
 
 // Add class 'active' to section when near top of viewport
-function makeActive(sectionsArr) {
-  sectionsArr.forEach(section => {
+function makeActive() {
+  // Get menu links
+  const menuLinks = document.querySelectorAll('.menu__link')
+  // Make the first link item active on page load
+  menuLinks[0].classList.add('active');
+
+  for(let i = 0; i < sectionsArr.length; i++) {
     window.addEventListener('scroll', () => {
-      if(Math.floor(window.scrollY) >= section.offsetTop) {
-        document.querySelector('.your-active-class').className = "";
-        let idSelector = section.id;
+      if(Math.floor(window.scrollY) >= sectionsArr[i].offsetTop) {
+        // Toggle the active state of the section which is already active  
+        document.querySelector('.your-active-class').classList.toggle('your-active-class');
+        // Make the section scrolled active
+        let idSelector = sectionsArr[i].id;
         idSelector = '#' + idSelector;
-        console.log(document.querySelector(idSelector));
-        document.querySelector(idSelector).className = 'your-active-class'; 
+        document.querySelector(idSelector).classList.toggle('your-active-class'); 
+        // Make the link for the section scrolled active
+        document.querySelector('.active').classList.toggle('active');
+        menuLinks[i].classList.toggle('active');
       }
-    })
-  })
+    }) 
+  }
 }
 
 // Scroll to anchor ID using scrollTO event
-const scrollToID = (sectionsArr) => {
+function scrollToID() {
   // Get menu links
   const menuLinks = document.querySelectorAll('.menu__link')
   /**
@@ -86,9 +96,9 @@ const scrollToID = (sectionsArr) => {
 */
 
 // Build menu 
-buildNav(sectionsArr);
+buildNav();
 // Scroll to section on link click
-scrollToID(sectionsArr);
+scrollToID();
 
 // Set sections as active
-makeActive(sectionsArr);
+makeActive();
