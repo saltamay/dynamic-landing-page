@@ -88,6 +88,23 @@ function scrollToID() {
     })
   }
 } 
+function hideNavBar() {
+  let isScrolling;
+  window.addEventListener('scroll', () => {
+    // Clear timeout func. when start scrolling
+    document.querySelector('.page__header').style.display = 'block';
+    window.clearTimeout(isScrolling);
+    if ((window.scrollY) >= sectionsArr[0].offsetTop) {
+      // Set timeout function to run after scrolling stops
+      isScrolling = setTimeout(() => {
+        // Hide navbar after 3 seconds
+
+        document.querySelector('.page__header').style.display = 'none';
+        document.querySelector('.page__header').style.transition = 'ease-in-out 2s all';
+      }, 4000);
+    }
+  })
+}
 
 /**
  * End Main Functions
@@ -99,6 +116,7 @@ function scrollToID() {
 buildNav();
 // Scroll to section on link click
 scrollToID();
-
 // Set sections as active
 makeActive();
+// Hide navbar after 3 seconds of not scrolling
+hideNavBar();
